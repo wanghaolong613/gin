@@ -185,3 +185,12 @@ func safeUint16(n int) uint16 {
 	}
 	return uint16(n)
 }
+
+// getFirstValue returns the first value from a slice of values
+func getFirstValue[T any](values []T, ok bool) (T, bool) {
+	var zero T
+	if ok && len(values) > 0 {
+		return values[0], ok
+	}
+	return zero, false
+}

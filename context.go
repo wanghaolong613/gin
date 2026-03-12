@@ -552,10 +552,7 @@ func (c *Context) DefaultQuery(key, defaultValue string) string {
 //	("", false) == c.GetQuery("id")
 //	("", true) == c.GetQuery("lastname")
 func (c *Context) GetQuery(key string) (string, bool) {
-	if values, ok := c.GetQueryArray(key); ok {
-		return values[0], ok
-	}
-	return "", false
+	return getFirstValue[string](c.GetQueryArray(key))
 }
 
 // QueryArray returns a slice of strings for a given query key.
@@ -622,10 +619,7 @@ func (c *Context) DefaultPostForm(key, defaultValue string) string {
 //		   email=                  -->  ("", true) := GetPostForm("email") // set email to ""
 //	                            -->  ("", false) := GetPostForm("email") // do nothing with email
 func (c *Context) GetPostForm(key string) (string, bool) {
-	if values, ok := c.GetPostFormArray(key); ok {
-		return values[0], ok
-	}
-	return "", false
+	return getFirstValue[string](c.GetPostFormArray(key))
 }
 
 // PostFormArray returns a slice of strings for a given form key.
